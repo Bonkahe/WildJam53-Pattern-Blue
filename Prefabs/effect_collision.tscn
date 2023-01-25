@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://j6exxi07d2m2"]
+
+[ext_resource type="Script" path="res://code/Player/InteractionEffects/EffectController.cs" id="1_gj1to"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xyl71"]
+size = Vector3(8, 10, 8)
+
+[node name="EffectCollision" type="Area3D"]
+collision_layer = 65536
+collision_mask = 65536
+script = ExtResource("1_gj1to")
+PauseDeletionTime = 2.0
+TileSize = Vector3(8, 8, 8)
+EffectCollisionLayers = 65536
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_xyl71")

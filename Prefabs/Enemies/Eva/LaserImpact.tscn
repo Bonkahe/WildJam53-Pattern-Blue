@@ -1,0 +1,105 @@
+[gd_scene load_steps=19 format=3 uid="uid://ukjjwsg26cea"]
+
+[ext_resource type="Script" path="res://code/World/DeleteEffectAfterTime.cs" id="1_qrn83"]
+[ext_resource type="Shader" uid="uid://8e6u1tv1opc7" path="res://art/Shaders/Effects/ExplosionShader.tres" id="2_5o15a"]
+[ext_resource type="Texture2D" uid="uid://dlsf2eeqe5xlk" path="res://art/Textures/Effects/BomberExplosion.png" id="3_itmcg"]
+[ext_resource type="AudioStream" uid="uid://jvsj3kvanhkf" path="res://Audio/TankExplosion.mp3" id="4_novhr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lecf6"]
+render_priority = 0
+shader = ExtResource("2_5o15a")
+shader_parameter/ProximityFadeDistance = 1.0
+shader_parameter/EmissionPower = null
+shader_parameter/tex_frg_4 = ExtResource("3_itmcg")
+
+[sub_resource type="Gradient" id="Gradient_5eqgf"]
+offsets = PackedFloat32Array(0.0208333, 0.4375, 1)
+colors = PackedColorArray(0.705882, 0.694118, 0, 0, 0.721569, 0.12549, 0, 0.247059, 0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8x57i"]
+gradient = SubResource("Gradient_5eqgf")
+
+[sub_resource type="Curve" id="Curve_ek2px"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0325581, 0.781818), 1.46591, 1.46591, 0, 0, Vector2(0.506977, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_31cpp"]
+curve = SubResource("Curve_ek2px")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vprej"]
+emission_shape = 1
+emission_sphere_radius = 1.5
+spread = 81.3
+gravity = Vector3(0, 2, 0)
+initial_velocity_max = 2.0
+angle_min = -290.4
+angle_max = 471.9
+scale_min = 3.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_31cpp")
+color_ramp = SubResource("GradientTexture1D_8x57i")
+
+[sub_resource type="QuadMesh" id="QuadMesh_b4tbs"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gxdpt"]
+load_path = "res://.godot/imported/BomberExplosion.png-a701af4a2add4686ae2fccee7f624bbb.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4064d"]
+render_priority = 0
+shader = ExtResource("2_5o15a")
+shader_parameter/ProximityFadeDistance = 1.0
+shader_parameter/EmissionPower = 0.0
+shader_parameter/tex_frg_4 = SubResource("CompressedTexture2D_gxdpt")
+
+[sub_resource type="Gradient" id="Gradient_842py"]
+offsets = PackedFloat32Array(0.421875, 0.973958, 1)
+colors = PackedColorArray(0.207055, 0.207055, 0.207055, 0.0669842, 0.196507, 0.196507, 0.196507, 0.963542, 0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3wn72"]
+gradient = SubResource("Gradient_842py")
+
+[sub_resource type="Curve" id="Curve_8jb3y"]
+_data = [Vector2(0, 0), 0.0, 0.0977272, 0, 0, Vector2(0.12093, 0.227273), 5.16558, 5.16558, 0, 0, Vector2(0.195349, 0.718182), 2.29447, 2.29447, 0, 0, Vector2(0.618605, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_c2ybg"]
+curve = SubResource("Curve_8jb3y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6bi08"]
+emission_shape = 1
+emission_sphere_radius = 1.8
+gravity = Vector3(0, -0.5, 0)
+initial_velocity_max = 2.0
+angle_min = -133.1
+scale_min = 5.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_c2ybg")
+color_ramp = SubResource("GradientTexture1D_3wn72")
+
+[node name="ExplosionTest" type="Node3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -16.1652, -0.0284014, -27.6609)
+script = ExtResource("1_qrn83")
+Duration = 1.0
+
+[node name="Fire" type="GPUParticles3D" parent="."]
+sorting_offset = 10.0
+material_override = SubResource("ShaderMaterial_lecf6")
+lifetime = 2.19
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_vprej")
+draw_pass_1 = SubResource("QuadMesh_b4tbs")
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_4064d")
+amount = 9
+lifetime = 1.21
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_6bi08")
+draw_pass_1 = SubResource("QuadMesh_b4tbs")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_novhr")
+volume_db = -4.955
+unit_size = 5.58
+autoplay = true
+bus = &"Explosions"

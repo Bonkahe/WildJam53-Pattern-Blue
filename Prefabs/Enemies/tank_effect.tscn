@@ -1,0 +1,66 @@
+[gd_scene load_steps=14 format=3 uid="uid://bhajsmeyjcc5x"]
+
+[ext_resource type="Shader" uid="uid://cycbmc0rkm5rl" path="res://art/Shaders/Effects/FlakShader.tres" id="1_6wp8q"]
+[ext_resource type="Texture2D" uid="uid://dlsf2eeqe5xlk" path="res://art/Textures/Effects/BomberExplosion.png" id="2_te7e5"]
+[ext_resource type="Script" path="res://code/World/DeleteEffectAfterTime.cs" id="3_xt262"]
+[ext_resource type="AudioStream" uid="uid://bd6p2jv3krr74" path="res://Audio/TankShot.mp3" id="4_peaja"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m6w34"]
+render_priority = 0
+shader = ExtResource("1_6wp8q")
+shader_parameter/EmissionPower = 7.0
+shader_parameter/Albedo = ExtResource("2_te7e5")
+
+[sub_resource type="Gradient" id="Gradient_jg6da"]
+offsets = PackedFloat32Array(0, 0.018617, 0.0478723, 0.992021)
+colors = PackedColorArray(0.549389, 0.412071, 4.81307e-07, 0, 0.772303, 0.363637, 0.0812447, 0.122095, 0.0196078, 0.0196078, 0.0196078, 0.219608, 0, 0, 0, 0.784314)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7m6su"]
+gradient = SubResource("Gradient_jg6da")
+
+[sub_resource type="Curve" id="Curve_45ons"]
+_data = [Vector2(0, 0.372727), 0.0, 1.81169, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v0adh"]
+curve = SubResource("Curve_45ons")
+
+[sub_resource type="Curve" id="Curve_gyppe"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0322581, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2y57j"]
+curve = SubResource("Curve_gyppe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yd1cu"]
+gravity = Vector3(-1.5, -0.5, -0.8)
+angle_min = -360.0
+angle_max = 360.0
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_v0adh")
+color_ramp = SubResource("GradientTexture1D_7m6su")
+turbulence_noise_speed = Vector3(2, 2, 2)
+turbulence_noise_speed_random = 0.4
+turbulence_influence_over_life = SubResource("CurveTexture_2y57j")
+
+[sub_resource type="QuadMesh" id="QuadMesh_4wgos"]
+
+[node name="TankEffect" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.745501, 1.33255, 0)
+material_override = SubResource("ShaderMaterial_m6w34")
+amount = 2
+lifetime = 2.15
+explosiveness = 1.0
+randomness = 0.79
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_yd1cu")
+draw_pass_1 = SubResource("QuadMesh_4wgos")
+script = ExtResource("3_xt262")
+Duration = 2.15
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_peaja")
+volume_db = -10.619
+unit_size = 5.58
+autoplay = true
+bus = &"TanksShots"

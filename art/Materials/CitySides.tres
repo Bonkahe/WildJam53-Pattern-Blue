@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d3o0qrcjmcy63"]
+
+[ext_resource type="Shader" uid="uid://bys7b0hpi41ri" path="res://art/Shaders/TownTriPlanar.tres" id="1_h05di"]
+[ext_resource type="Texture2D" uid="uid://bklwqmk2413bb" path="res://art/Textures/BuildingCitySides.png" id="2_kv0yh"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_h05di")
+shader_parameter/Roughness = 0.0
+shader_parameter/HighlightBlend = 0.02
+shader_parameter/triplanar_scale = Vector3(1, 1, 1)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = null
+shader_parameter/Albedo = ExtResource("2_kv0yh")

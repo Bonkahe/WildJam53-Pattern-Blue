@@ -1,0 +1,141 @@
+[gd_scene load_steps=19 format=3 uid="uid://c7wqe0wmp35oa"]
+
+[ext_resource type="Texture2D" uid="uid://b72fvft5ttw5o" path="res://art/Textures/Decals/OceanSplatter.png" id="1_b7dd0"]
+[ext_resource type="Script" path="res://code/Player/InteractionEffects/AnimationStarter.cs" id="1_r40q2"]
+[ext_resource type="Texture2D" uid="uid://s4qkcpx5lvbo" path="res://art/Textures/Decals/OceanSplatterParticle.png" id="2_x7w3y"]
+[ext_resource type="Script" path="res://code/Helpers/DecalController.cs" id="3_8j3t7"]
+[ext_resource type="PackedScene" uid="uid://j6exxi07d2m2" path="res://Prefabs/effect_collision.tscn" id="4_j0f5r"]
+
+[sub_resource type="Gradient" id="Gradient_ccrsw"]
+offsets = PackedFloat32Array(0.00403226)
+colors = PackedColorArray(0, 0.65098, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jt7dh"]
+gradient = SubResource("Gradient_ccrsw")
+
+[sub_resource type="Animation" id="Animation_k8rmo"]
+resource_name = "Initialize"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "scale_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OceanDecal")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 3, 1, 1.3, 1.3, 1.3)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ablb"]
+_data = {
+"Initialize": SubResource("Animation_k8rmo")
+}
+
+[sub_resource type="Gradient" id="Gradient_jj4gh"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.640754, 0.00309288, 0.917877, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sd8r3"]
+gradient = SubResource("Gradient_jj4gh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uc05p"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_x7w3y")
+rim = 0.11
+clearcoat_roughness = 0.0
+subsurf_scatter_strength = 1.0
+subsurf_scatter_texture = SubResource("GradientTexture1D_sd8r3")
+backlight = Color(0, 0.847059, 0, 1)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+proximity_fade_enabled = true
+proximity_fade_distance = 1.2
+
+[sub_resource type="Gradient" id="Gradient_pxse8"]
+offsets = PackedFloat32Array(0, 0.241228, 0.815789, 1)
+colors = PackedColorArray(1, 0, 0, 0, 0.605674, 1.66051e-06, 3.85046e-07, 1, 0.391064, 5.83585e-07, 2.16588e-07, 0.947977, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_es00u"]
+gradient = SubResource("Gradient_pxse8")
+
+[sub_resource type="Curve" id="Curve_wmepq"]
+_data = [Vector2(0, 0.363636), 0.0, 0.0, 0, 0, Vector2(1, 0.672727), -2.49913, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ct3bb"]
+curve = SubResource("Curve_wmepq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y0eor"]
+lifetime_randomness = 0.64
+emission_shape = 1
+emission_sphere_radius = 2.0
+initial_velocity_min = 0.12
+initial_velocity_max = 0.2
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+radial_accel_max = 9.92
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_ct3bb")
+color_ramp = SubResource("GradientTexture1D_es00u")
+hue_variation_min = -0.01
+hue_variation_max = 0.01
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 32
+sub_emitter_keep_velocity = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_n2rn3"]
+
+[node name="OceanEffect" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+script = ExtResource("1_r40q2")
+AnimationPlayerPath = NodePath("AnimationPlayer")
+InitializationAnimationName = "Initialize"
+
+[node name="OceanDecal" type="Decal" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+extents = Vector3(5, 9, 5)
+texture_albedo = ExtResource("1_b7dd0")
+texture_orm = SubResource("GradientTexture1D_jt7dh")
+emission_energy = 0.0
+upper_fade = 0.713526
+lower_fade = 0.126135
+cull_mask = 1047551
+script = ExtResource("3_8j3t7")
+MovementColliderLayers = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_4ablb")
+}
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.24343, 0)
+layers = 1024
+sorting_offset = 10.0
+material_override = SubResource("StandardMaterial3D_uc05p")
+cast_shadow = 0
+emitting = false
+amount = 150
+lifetime = 2.0
+explosiveness = 0.46
+visibility_aabb = AABB(-5.4045, -8.21057, -5.15724, 10.809, 16.4211, 10.3145)
+process_material = SubResource("ParticleProcessMaterial_y0eor")
+draw_pass_1 = SubResource("QuadMesh_n2rn3")
+
+[node name="EffectCollision" parent="." instance=ExtResource("4_j0f5r")]
+EffectContainerPath = NodePath("..")

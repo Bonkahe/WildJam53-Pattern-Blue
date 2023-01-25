@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://dpkyyexdc6c5v"
+path="res://.godot/imported/digital-7 (mono italic).ttf-4210c82612c44c2827340d53c224711d.fontdata"
+
+[deps]
+
+source_file="res://art/Materials/Text/digital-7 (mono italic).ttf"
+dest_files=["res://.godot/imported/digital-7 (mono italic).ttf-4210c82612c44c2827340d53c224711d.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

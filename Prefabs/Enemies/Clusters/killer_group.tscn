@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://f07jcxe6884e"]
+
+[ext_resource type="Script" path="res://code/Enemies/AIGroupController.cs" id="1_3xjme"]
+[ext_resource type="PackedScene" uid="uid://b3bu2mhyxt5db" path="res://Prefabs/Enemies/enemy_platoon_tank_offense.tscn" id="2_en4jl"]
+
+[node name="KillerGroup" type="Node3D" groups=["EnemyCommand"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.4398, -0.377079, -6.95118)
+script = ExtResource("1_3xjme")
+SupplyPlatoonControllerPaths = [NodePath("EnemyPlatoonTankOffense2"), NodePath("EnemyPlatoonTankOffense3"), NodePath("EnemyPlatoonTankOffense4"), NodePath("EnemyPlatoonTankOffense5")]
+
+[node name="EnemyPlatoonTankOffense2" parent="." instance=ExtResource("2_en4jl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.44499, 0.596115, -3.87452)
+ChaseDistance = 300.0
+WanderDistanceRange = Vector2(2, 5)
+
+[node name="EnemyPlatoonTankOffense3" parent="." instance=ExtResource("2_en4jl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.01089, 0.596115, 1.01408)
+ChaseDistance = 300.0
+WanderDistanceRange = Vector2(2, 5)
+
+[node name="EnemyPlatoonTankOffense4" parent="." instance=ExtResource("2_en4jl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57231, 0.596115, 4.09618)
+ChaseDistance = 300.0
+WanderDistanceRange = Vector2(2, 5)
+
+[node name="EnemyPlatoonTankOffense5" parent="." instance=ExtResource("2_en4jl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53821, 0.596115, 8.14978)
+ChaseDistance = 300.0
+WanderDistanceRange = Vector2(2, 5)

@@ -1,0 +1,65 @@
+[gd_scene load_steps=13 format=3 uid="uid://dd26kaloyoq6b"]
+
+[ext_resource type="Shader" uid="uid://cycbmc0rkm5rl" path="res://art/Shaders/Effects/FlakShader.tres" id="1_6kq2r"]
+[ext_resource type="Texture2D" uid="uid://dlsf2eeqe5xlk" path="res://art/Textures/Effects/BomberExplosion.png" id="2_dlvhj"]
+[ext_resource type="AudioStream" uid="uid://1ks8pfy07i6e" path="res://Audio/FlakCannonsAudio.mp3" id="3_lmcf7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbdng"]
+render_priority = 0
+shader = ExtResource("1_6kq2r")
+shader_parameter/EmissionPower = 7.0
+shader_parameter/Albedo = ExtResource("2_dlvhj")
+
+[sub_resource type="Gradient" id="Gradient_jsfn4"]
+offsets = PackedFloat32Array(0, 0.018617, 0.0478723, 0.992021)
+colors = PackedColorArray(0.549389, 0.412071, 4.81307e-07, 0, 0.772303, 0.363637, 0.0812447, 0.122095, 0.0196078, 0.0196078, 0.0196078, 0.219608, 0, 0, 0, 0.784314)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hyikl"]
+gradient = SubResource("Gradient_jsfn4")
+
+[sub_resource type="Curve" id="Curve_yewad"]
+_data = [Vector2(0, 0.372727), 0.0, 1.81169, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7sp30"]
+curve = SubResource("Curve_yewad")
+
+[sub_resource type="Curve" id="Curve_0b5cy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0322581, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_l38qp"]
+curve = SubResource("Curve_0b5cy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m58oe"]
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector3(-3, -1, -2)
+angle_min = -360.0
+angle_max = 360.0
+scale_min = 1.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_7sp30")
+color_ramp = SubResource("GradientTexture1D_hyikl")
+turbulence_enabled = true
+turbulence_noise_speed = Vector3(2, 2, 2)
+turbulence_noise_speed_random = 0.4
+turbulence_influence_over_life = SubResource("CurveTexture_l38qp")
+
+[sub_resource type="QuadMesh" id="QuadMesh_d4ik8"]
+
+[node name="FlakShot" type="Node3D"]
+process_mode = 1
+
+[node name="FlakEffect" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+material_override = SubResource("ShaderMaterial_pbdng")
+amount = 150
+lifetime = 4.63
+process_material = SubResource("ParticleProcessMaterial_m58oe")
+draw_pass_1 = SubResource("QuadMesh_d4ik8")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.5237, 0)
+stream = ExtResource("3_lmcf7")
+bus = &"Flak"

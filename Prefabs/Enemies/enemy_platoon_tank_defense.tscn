@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0homfeeix2t3"]
+
+[ext_resource type="Script" path="res://code/Enemies/AIPlatoonController.cs" id="1_xr5mp"]
+[ext_resource type="PackedScene" uid="uid://c6m5eiviv2xp5" path="res://Prefabs/Enemies/tank.tscn" id="2_cmsk3"]
+[ext_resource type="PackedScene" uid="uid://dnkui0d0uy3fo" path="res://Prefabs/marker.tscn" id="3_bcg47"]
+
+[node name="EnemyPlatoonTankDefense" type="Node3D" node_paths=PackedStringArray("MarkerPosition") groups=["Enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3438, 0.567714, -46.6601)
+script = ExtResource("1_xr5mp")
+PlatoonControllerPaths = [NodePath("Tank"), NodePath("Tank2"), NodePath("Tank3"), NodePath("Tank4"), NodePath("Tank5"), NodePath("Tank6"), NodePath("Tank7"), NodePath("Tank8"), NodePath("Tank9"), NodePath("Tank10")]
+MarkerPosition = NodePath("Marker")
+ThisAIType = 5
+AllowEngagement = true
+ChaseDistance = 30.0
+EngageDistance = 40.0
+WanderDelayRange = Vector2(3, 6)
+WanderDistanceRange = Vector2(30, 40)
+
+[node name="Tank" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.86592, -1.29852, -3.2595)
+
+[node name="Tank2" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.68419, -1.00535, -4.37612)
+
+[node name="Tank3" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.69156, -0.756526, -5.59918)
+
+[node name="Tank4" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.12323, -1.55915, -3.35903)
+NavAgentPath = NodePath("../Tank/TankNavAgent")
+
+[node name="Tank5" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.35841, -1.33262, -3.8224)
+NavAgentPath = NodePath("../Tank2/TankNavAgent")
+
+[node name="Tank6" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.290204, -0.774988, -5.86739)
+NavAgentPath = NodePath("../Tank3/TankNavAgent")
+
+[node name="Tank7" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.46237, -0.0759447, -5.23888)
+
+[node name="Tank8" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.70419, -0.588037, -4.33497)
+
+[node name="Tank9" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.18742, -0.949355, -4.12249)
+
+[node name="Tank10" parent="." instance=ExtResource("2_cmsk3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.2221, -1.00602, -4.53173)
+
+[node name="Marker" parent="." instance=ExtResource("3_bcg47")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

@@ -1,0 +1,79 @@
+[gd_scene load_steps=14 format=3 uid="uid://bbfdnsomy8m3v"]
+
+[ext_resource type="Script" path="res://code/World/DeleteEffectAfterTime.cs" id="1_h7u2t"]
+[ext_resource type="Shader" uid="uid://8e6u1tv1opc7" path="res://art/Shaders/Effects/ExplosionShader.tres" id="2_xe7hp"]
+[ext_resource type="Texture2D" uid="uid://dlsf2eeqe5xlk" path="res://art/Textures/Effects/BomberExplosion.png" id="3_0dghi"]
+[ext_resource type="AudioStream" uid="uid://jvsj3kvanhkf" path="res://Audio/TankExplosion.mp3" id="4_6vxtq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lecf6"]
+render_priority = 0
+shader = ExtResource("2_xe7hp")
+shader_parameter/ProximityFadeDistance = 1.0
+shader_parameter/EmissionPower = null
+shader_parameter/tex_frg_4 = ExtResource("3_0dghi")
+
+[sub_resource type="Gradient" id="Gradient_07o4g"]
+offsets = PackedFloat32Array(0.0208333, 0.4375, 1)
+colors = PackedColorArray(0.705882, 0.694118, 0, 0, 0.721569, 0.12549, 0, 0.247059, 0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sgn5y"]
+gradient = SubResource("Gradient_07o4g")
+
+[sub_resource type="Curve" id="Curve_f3fks"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0325581, 0.781818), 1.46591, 1.46591, 0, 0, Vector2(0.506977, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_1ihve"]
+curve = SubResource("Curve_f3fks")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ncgj"]
+emission_shape = 1
+emission_sphere_radius = 1.5
+spread = 81.3
+gravity = Vector3(0, -2, 0)
+initial_velocity_max = 2.0
+angle_min = -290.4
+angle_max = 471.9
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_1ihve")
+color_ramp = SubResource("GradientTexture1D_sgn5y")
+
+[sub_resource type="QuadMesh" id="QuadMesh_b4tbs"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gxdpt"]
+load_path = "res://.godot/imported/BomberExplosion.png-a701af4a2add4686ae2fccee7f624bbb.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4064d"]
+render_priority = 0
+shader = ExtResource("2_xe7hp")
+shader_parameter/ProximityFadeDistance = 1.0
+shader_parameter/EmissionPower = 0.0
+shader_parameter/tex_frg_4 = SubResource("CompressedTexture2D_gxdpt")
+
+[node name="DeathExplosion" type="Node3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -12.7306, -0.0284014, -30.5205)
+script = ExtResource("1_h7u2t")
+Duration = 1.0
+
+[node name="Fire" type="GPUParticles3D" parent="."]
+sorting_offset = 10.0
+material_override = SubResource("ShaderMaterial_lecf6")
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_8ncgj")
+draw_pass_1 = SubResource("QuadMesh_b4tbs")
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_4064d")
+amount = 5
+lifetime = 0.56
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_8ncgj")
+draw_pass_1 = SubResource("QuadMesh_b4tbs")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_6vxtq")
+volume_db = -2.123
+unit_size = 9.12
+pitch_scale = 2.02
+autoplay = true
+bus = &"Explosions"

@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://covu0c00kwpfg"]
+
+[ext_resource type="Script" path="res://code/World/DeleteEffectAfterTime.cs" id="1_o48gw"]
+[ext_resource type="AudioStream" uid="uid://de68o8xh4tfv2" path="res://Audio/TeleportSound.mp3" id="2_qr8ll"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rse1"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.372549)
+emission = Color(0.968627, 0.815686, 0.858824, 1)
+rim_enabled = true
+proximity_fade_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_iiatl"]
+offsets = PackedFloat32Array(0, 0.0260223, 0.635688, 1)
+colors = PackedColorArray(0.789738, 0.429872, 0.602257, 0.0669842, 0.320529, 0.0960184, 0.465165, 0.848816, 0.587348, 0.0587658, 0.581832, 0.472794, 0.560784, 0.360784, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xsb5l"]
+gradient = SubResource("Gradient_iiatl")
+
+[sub_resource type="Curve" id="Curve_ha4t1"]
+_data = [Vector2(0, 0), 0.0, 0.0977272, 0, 0, Vector2(0, 0.663636), 0.748718, 0.748718, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_72may"]
+curve = SubResource("Curve_ha4t1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6e50g"]
+lifetime_randomness = 0.41
+emission_shape = 1
+emission_sphere_radius = 1.8
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, -0.5, 0)
+initial_velocity_max = 2.0
+angle_min = -133.1
+scale_min = 25.0
+scale_max = 30.0
+scale_curve = SubResource("CurveTexture_72may")
+color_ramp = SubResource("GradientTexture1D_xsb5l")
+
+[sub_resource type="SphereMesh" id="SphereMesh_u488w"]
+
+[node name="EvaTeleport" type="Node3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 51.3019, 30.5171, 60.0127)
+script = ExtResource("1_o48gw")
+Duration = 2.1
+
+[node name="TeleportEffect" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56.4363, 0)
+material_override = SubResource("StandardMaterial3D_2rse1")
+cast_shadow = 0
+amount = 3
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.04
+visibility_aabb = AABB(-18, -23, -18, 36, 46, 36)
+process_material = SubResource("ParticleProcessMaterial_6e50g")
+draw_pass_1 = SubResource("SphereMesh_u488w")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 64.2861, 0)
+stream = ExtResource("2_qr8ll")
+volume_db = 5.713
+unit_size = 6.69
+autoplay = true
+bus = &"Eva"

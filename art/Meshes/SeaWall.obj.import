@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dk26g4ugi07li"
+path="res://.godot/imported/SeaWall.obj-d024c34a09edc316e776afc59b7dee73.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SeaWall.obj-d024c34a09edc316e776afc59b7dee73.mesh"]
+
+source_file="res://art/Meshes/SeaWall.obj"
+dest_files=["res://.godot/imported/SeaWall.obj-d024c34a09edc316e776afc59b7dee73.mesh", "res://.godot/imported/SeaWall.obj-d024c34a09edc316e776afc59b7dee73.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

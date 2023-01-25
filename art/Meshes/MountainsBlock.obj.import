@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dfqx3qjutx4wg"
+path="res://.godot/imported/MountainsBlock.obj-28a3d1969ee37f4bf6a9393e301a16ed.mesh"
+
+[deps]
+
+files=["res://.godot/imported/MountainsBlock.obj-28a3d1969ee37f4bf6a9393e301a16ed.mesh"]
+
+source_file="res://art/Meshes/MountainsBlock.obj"
+dest_files=["res://.godot/imported/MountainsBlock.obj-28a3d1969ee37f4bf6a9393e301a16ed.mesh", "res://.godot/imported/MountainsBlock.obj-28a3d1969ee37f4bf6a9393e301a16ed.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

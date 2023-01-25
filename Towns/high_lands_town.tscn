@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhcur8hfspudf"]
+
+[ext_resource type="ArrayMesh" uid="uid://bmxunf7g82jg2" path="res://art/Meshes/HighLandsTown.obj" id="1_jh116"]
+[ext_resource type="Material" uid="uid://bftmctby8n07y" path="res://art/Materials/TownHouseRoof.tres" id="2_66k4s"]
+[ext_resource type="Material" uid="uid://pu2v8fcrt3kn" path="res://art/Materials/TownHouseWalls.tres" id="3_870ko"]
+
+[node name="HighLandsTown" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="HighLandsTownmesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.53, 0)
+mesh = ExtResource("1_jh116")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_66k4s")
+surface_material_override/1 = ExtResource("3_870ko")

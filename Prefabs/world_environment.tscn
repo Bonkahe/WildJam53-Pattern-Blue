@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dke77mkqawe5y"]
+
+[ext_resource type="Environment" uid="uid://dqpj3ameslyfa" path="res://art/Post/EnviromentHigh.tres" id="1_vhf2b"]
+[ext_resource type="Script" path="res://code/World/EnviromentSettingsHandler.cs" id="2_vptv6"]
+[ext_resource type="Environment" uid="uid://dyovkmtglfvmt" path="res://art/Post/EnviromentLow.tres" id="3_flxy8"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" groups=["Settings"]]
+environment = ExtResource("1_vhf2b")
+script = ExtResource("2_vptv6")
+HighEnviroment = ExtResource("1_vhf2b")
+LowEnviroment = ExtResource("3_flxy8")

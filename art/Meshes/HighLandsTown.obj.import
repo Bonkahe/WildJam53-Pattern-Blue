@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmxunf7g82jg2"
+path="res://.godot/imported/HighLandsTown.obj-8ad846e5523bba5422ca115544b04b3e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/HighLandsTown.obj-8ad846e5523bba5422ca115544b04b3e.mesh"]
+
+source_file="res://art/Meshes/HighLandsTown.obj"
+dest_files=["res://.godot/imported/HighLandsTown.obj-8ad846e5523bba5422ca115544b04b3e.mesh", "res://.godot/imported/HighLandsTown.obj-8ad846e5523bba5422ca115544b04b3e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

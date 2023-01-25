@@ -1,0 +1,85 @@
+[gd_scene load_steps=16 format=3 uid="uid://b52jwaqqg5wp1"]
+
+[ext_resource type="ArrayMesh" uid="uid://yijm60bc0d5t" path="res://art/Meshes/Enemies/TankAntiAir.obj" id="1_px81j"]
+[ext_resource type="Script" path="res://code/Enemies/AITroopController.cs" id="1_xwirs"]
+[ext_resource type="Material" uid="uid://cxofr2o6xqk5x" path="res://art/Materials/Enemies/TankBody.tres" id="2_hx7cu"]
+[ext_resource type="PackedScene" uid="uid://bbfdnsomy8m3v" path="res://Prefabs/Enemies/death_explosion.tscn" id="2_n1qhj"]
+[ext_resource type="Shader" uid="uid://cycbmc0rkm5rl" path="res://art/Shaders/Effects/FlakShader.tres" id="4_p55da"]
+[ext_resource type="Texture2D" uid="uid://dlsf2eeqe5xlk" path="res://art/Textures/Effects/BomberExplosion.png" id="5_k6vyw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbdng"]
+render_priority = 0
+shader = ExtResource("4_p55da")
+shader_parameter/EmissionPower = 7.0
+shader_parameter/Albedo = ExtResource("5_k6vyw")
+
+[sub_resource type="Gradient" id="Gradient_0i5ed"]
+offsets = PackedFloat32Array(0, 0.018617, 0.0478723, 0.992021)
+colors = PackedColorArray(0.549389, 0.412071, 4.81307e-07, 0, 0.772303, 0.363637, 0.0812447, 0.122095, 0.0196078, 0.0196078, 0.0196078, 0.219608, 0, 0, 0, 0.784314)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d5olc"]
+gradient = SubResource("Gradient_0i5ed")
+
+[sub_resource type="Curve" id="Curve_bhv8e"]
+_data = [Vector2(0, 0.372727), 0.0, 1.81169, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_muhdh"]
+curve = SubResource("Curve_bhv8e")
+
+[sub_resource type="Curve" id="Curve_inuwd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0322581, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_y6cgo"]
+curve = SubResource("Curve_inuwd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h154f"]
+gravity = Vector3(-1.5, -0.5, -0.8)
+angle_min = -360.0
+angle_max = 360.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_muhdh")
+color_ramp = SubResource("GradientTexture1D_d5olc")
+turbulence_noise_speed = Vector3(2, 2, 2)
+turbulence_noise_speed_random = 0.4
+turbulence_influence_over_life = SubResource("CurveTexture_y6cgo")
+
+[sub_resource type="QuadMesh" id="QuadMesh_d4ik8"]
+
+[node name="TankAntiAir" type="Node3D" node_paths=PackedStringArray("Visuals")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.24289, -1.38592, -6.32975)
+script = ExtResource("1_xwirs")
+MovementColliderLayers = 1
+EffectRegionColliderLayers = 65536
+DeathEffect = ExtResource("2_n1qhj")
+VisualEffectPath = NodePath("Visuals/TankAntiAirMesh/FlakEffect")
+NavAgentPath = NodePath("TankNavAgent")
+Visuals = NodePath("Visuals")
+MovementSpeed = 7.0
+SlowedMovementSpeed = 3.0
+RotationSpeed = 2.0
+
+[node name="TankNavAgent" type="NavigationAgent3D" parent="."]
+agent_height_offset = 0.4
+navigation_layers = 3
+
+[node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="TankAntiAirMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0.5, -2.18557e-08, -2.18557e-08, -2.18557e-08, -0.5, 9.55343e-16, 0, 0, 0)
+mesh = ExtResource("1_px81j")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("2_hx7cu")
+
+[node name="FlakEffect" type="GPUParticles3D" parent="Visuals/TankAntiAirMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.745501, 1.33255, 0)
+material_override = SubResource("ShaderMaterial_pbdng")
+amount = 10
+lifetime = 4.63
+explosiveness = 0.41
+randomness = 0.79
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_h154f")
+draw_pass_1 = SubResource("QuadMesh_d4ik8")

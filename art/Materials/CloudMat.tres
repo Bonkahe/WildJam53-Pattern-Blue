@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bqy567rek2ps1"]
+
+[ext_resource type="Shader" uid="uid://d0hlhul1cccpm" path="res://art/Shaders/Clouds.tres" id="1_18htv"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_18htv")
+shader_parameter/Albedo = Color(1, 1, 1, 1)
+shader_parameter/FresnelPower = 0.284
+shader_parameter/LowerDepthFade = 0.0
+shader_parameter/UpperDepthFade = 0.498
+shader_parameter/DepthDistance = 4.239
+shader_parameter/Emission = Color(0, 0, 0, 1)

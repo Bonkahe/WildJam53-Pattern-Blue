@@ -1,0 +1,129 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://bys7b0hpi41ri"]
+
+[sub_resource type="VisualShaderNodeTextureParameterTriplanar" id="VisualShaderNodeTextureParameterTriplanar_d12ix"]
+parameter_name = "Albedo"
+
+[sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_t7emg"]
+default_input_values = [2, false, 3, 2.5]
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_7id3n"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1, 1, 1, 1), 2, Quaternion(0.5, 0.5, 0.5, 0.5)]
+op_type = 5
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_pv8rc"]
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_v0d78"]
+default_input_values = [0, 0.25, 1, 0.5, 2, 0.5]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_wjr7n"]
+parameter_name = "HighlightBlend"
+hint = 1
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_7r1me"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1, 1, 1, 1), 2, Quaternion(0.5, 0.5, 0.5, 0.5)]
+op_type = 5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_qg8i1"]
+parameter_name = "Roughness"
+hint = 1
+default_value_enabled = true
+
+[resource]
+code = "shader_type spatial;
+uniform sampler2D Albedo;
+uniform float Roughness : hint_range(0, 1) = 0;
+uniform float HighlightBlend : hint_range(0, 1) = 1;
+
+
+// TextureUniformTriplanar
+	vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {
+		vec4 samp = vec4(0.0);
+		samp += texture(p_sampler, p_triplanar_pos.xy) * p_weights.z;
+		samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
+		samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
+		return samp;
+	}
+
+	uniform vec3 triplanar_scale = vec3(1.0, 1.0, 1.0);
+	uniform vec3 triplanar_offset;
+	uniform float triplanar_sharpness = 0.5;
+
+	varying vec3 triplanar_power_normal;
+	varying vec3 triplanar_pos;
+
+void vertex() {
+// TextureUniformTriplanar
+	{
+		triplanar_power_normal = pow(abs(NORMAL), vec3(triplanar_sharpness));
+		triplanar_power_normal /= dot(triplanar_power_normal, vec3(1.0));
+		triplanar_pos = VERTEX * triplanar_scale + triplanar_offset;
+		triplanar_pos *= vec3(1.0, -1.0, 1.0);
+	}
+}
+
+void fragment() {
+// TextureUniformTriplanar:2
+	vec4 n_out2p0 = triplanar_texture(Albedo, triplanar_power_normal, triplanar_pos);
+
+
+// FloatParameter:9
+	float n_out9p0 = Roughness;
+
+
+// ColorConstant:5
+	vec4 n_out5p0 = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+// Fresnel:3
+	float n_in3p3 = 2.50000;
+	float n_out3p0 = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), n_in3p3);
+
+
+// SmoothStep:6
+	float n_in6p0 = 0.25000;
+	float n_in6p1 = 0.50000;
+	float n_out6p0 = smoothstep(n_in6p0, n_in6p1, n_out3p0);
+
+
+// Mix:4
+	vec4 n_in4p0 = vec4(0.00000, 0.00000, 0.00000, 0.00000);
+	vec4 n_out4p0 = mix(n_in4p0, n_out5p0, vec4(n_out6p0));
+
+
+// FloatParameter:7
+	float n_out7p0 = HighlightBlend;
+
+
+// Mix:8
+	vec4 n_in8p0 = vec4(0.00000, 0.00000, 0.00000, 0.00000);
+	vec4 n_out8p0 = mix(n_in8p0, n_out4p0, vec4(n_out7p0));
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ROUGHNESS = n_out9p0;
+	EMISSION = vec3(n_out8p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-145.752, -24.0303)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTextureParameterTriplanar_d12ix")
+nodes/fragment/2/position = Vector2(-800, 40)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFresnel_t7emg")
+nodes/fragment/3/position = Vector2(-980, 540)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_7id3n")
+nodes/fragment/4/position = Vector2(-380, 360)
+nodes/fragment/5/node = SubResource("VisualShaderNodeColorConstant_pv8rc")
+nodes/fragment/5/position = Vector2(-680, 380)
+nodes/fragment/6/node = SubResource("VisualShaderNodeSmoothStep_v0d78")
+nodes/fragment/6/position = Vector2(-660, 540)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatParameter_wjr7n")
+nodes/fragment/7/position = Vector2(-180, 500)
+nodes/fragment/8/node = SubResource("VisualShaderNodeMix_7r1me")
+nodes/fragment/8/position = Vector2(80, 400)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatParameter_qg8i1")
+nodes/fragment/9/position = Vector2(-200, -60)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 5, 0, 4, 1, 3, 0, 6, 2, 6, 0, 4, 2, 7, 0, 8, 2, 4, 0, 8, 1, 8, 0, 0, 5, 9, 0, 0, 3)

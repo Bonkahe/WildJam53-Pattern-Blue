@@ -1,0 +1,310 @@
+[gd_scene load_steps=10 format=3 uid="uid://brh6wpgrdhruv"]
+
+[ext_resource type="Script" path="res://code/World/mainmenu.cs" id="1_qek7w"]
+[ext_resource type="FontFile" uid="uid://c5nya6skib7a2" path="res://demo/fonts/Fake Identity.ttf" id="1_ywpbx"]
+[ext_resource type="Script" path="res://demo/button.gd" id="2_i76mp"]
+[ext_resource type="FontFile" uid="uid://bkybapl7o8hk" path="res://art/Materials/Text/Times New Roman MT Std Bold Condensed.otf" id="4_h3fhr"]
+[ext_resource type="Script" path="res://code/World/SettingsToggle.cs" id="5_kaojl"]
+[ext_resource type="AudioStream" uid="uid://8htm8joxajf3" path="res://Audio/Music/403920__vabsounds__arcade-war.wav" id="6_sqf0e"]
+[ext_resource type="Script" path="res://code/Helpers/BossBattleSkip.cs" id="7_w0rj2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8yibf"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ltyyn"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_qek7w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.298039, 0.670588, 0.831373, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 45
+text = "PATTERN BLUE"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 24
+text = "HUMANS MARCH, STOP THEIR
+CONSTRUCTION BEFORE
+IT COMES TO FRUITION."
+horizontal_alignment = 1
+
+[node name="next_scene" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 32
+text = "BEGIN GAME"
+script = ExtResource("2_i76mp")
+scene = "testscene"
+fade_in_speed = 2.0
+fade_out_pattern = "splashed_dirt"
+fade_in_pattern = "splashed_dirt"
+fade_out_smoothness = 0.2
+fade_in_smoothness = 0.3
+fade_out_inverted = true
+color = Color(1, 1, 1, 1)
+timeout = 0.2
+
+[node name="check" type="CheckButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_h3fhr")
+theme_override_font_sizes/font_size = 24
+text = "Lower Difficulty"
+script = ExtResource("5_kaojl")
+
+[node name="check2" type="CheckButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_h3fhr")
+theme_override_font_sizes/font_size = 24
+text = "High Quality Visuals"
+script = ExtResource("5_kaojl")
+thisType = 1
+
+[node name="check3" type="CheckButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_h3fhr")
+theme_override_font_sizes/font_size = 24
+text = "Music Enabled"
+script = ExtResource("5_kaojl")
+thisType = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="reset" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 32
+text = "RESET"
+script = ExtResource("2_i76mp")
+scene = "ignore"
+
+[node name="reload" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 32
+text = "RELOAD"
+script = ExtResource("2_i76mp")
+scene = "reload"
+fade_out_speed = 0.2
+fade_in_speed = 0.2
+
+[node name="back" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 32
+text = "BACK"
+script = ExtResource("2_i76mp")
+scene = "back"
+fade_out_speed = 0.5
+fade_in_speed = 0.5
+color = Color(0.564706, 0.376471, 0.584314, 1)
+timeout = 0.5
+
+[node name="exit" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 32
+text = "EXIT"
+script = ExtResource("2_i76mp")
+scene = "exit"
+fade_out_speed = 0.3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -343.0
+offset_top = 28.0
+offset_right = -32.0
+offset_bottom = 618.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 24
+text = "Pattern Blue is a small project made in a week for the game jam \"Wild Jam #53\"."
+vertical_alignment = 2
+autowrap_mode = 3
+uppercase = true
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 24
+text = "Made by Bonkahe"
+vertical_alignment = 2
+autowrap_mode = 3
+uppercase = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 25.0
+offset_top = 32.0
+offset_right = 355.0
+offset_bottom = 482.0
+mouse_filter = 2
+
+[node name="Instructions" type="Label" parent="VBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_h3fhr")
+text = "INSTRUCTIONS:
+"
+label_settings = SubResource("LabelSettings_8yibf")
+autowrap_mode = 3
+
+[node name="Instructions2" type="Label" parent="VBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_h3fhr")
+theme_override_font_sizes/font_size = 24
+text = "Don't allow the assembly to be completed.
+  Using the resources around you destroy and disrupt the supply lines.
+  The ocean will destroy troops but can be traversed following the destruction.
+  Fresh water will protect you from fire.
+  Snow can be used to slow enemy troop movements.
+  When the Assembly is complete, the humans ultimate weapon will be deployed, should this happen defeat is assured."
+label_settings = SubResource("LabelSettings_ltyyn")
+autowrap_mode = 3
+uppercase = true
+
+[node name="Instructions3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -230.0
+offset_right = 461.0
+offset_bottom = -5.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_h3fhr")
+theme_override_font_sizes/font_size = 24
+text = "left click / \"Space\" key
+    Confiscate material.
+Right click / \"E\" Key
+    utilize material.
+WASD / Arrows
+    Traverse.
+Mouse
+    look"
+label_settings = SubResource("LabelSettings_ltyyn")
+autowrap_mode = 3
+uppercase = true
+
+[node name="BossBattle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_sqf0e")
+volume_db = -17.912
+autoplay = true
+bus = &"Music"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -395.0
+offset_top = -126.0
+offset_right = 335.0
+offset_bottom = 41.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -0.0726671
+scale = Vector2(0.591121, 0.591121)
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 18
+text = "Sometimes on loading the second level
+there is a crash, I had a hard time
+locking down just where it is, if you hit it, 
+click this button"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="next_scene2" type="Button" parent="." groups=["FinalBossButton"]]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = -80.0
+offset_right = 88.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.616022, 0.616022)
+theme_override_fonts/font = ExtResource("1_ywpbx")
+theme_override_font_sizes/font_size = 32
+text = "FINAL BOSS"
+script = ExtResource("2_i76mp")
+scene = "FinalScene"
+fade_in_speed = 2.0
+fade_out_pattern = "splashed_dirt"
+fade_in_pattern = "splashed_dirt"
+fade_out_smoothness = 0.2
+fade_in_smoothness = 0.3
+fade_out_inverted = true
+color = Color(1, 1, 1, 1)
+timeout = 0.2
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("7_w0rj2")
+
+[connection signal="button_up" from="CenterContainer/VBoxContainer/next_scene" to="CenterContainer/VBoxContainer/next_scene" method="_on_button_button_up"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/check" to="CenterContainer/VBoxContainer/check" method="OnButtonUp"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/check2" to="CenterContainer/VBoxContainer/check2" method="OnButtonUp"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/check3" to="CenterContainer/VBoxContainer/check3" method="OnButtonUp"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/reset" to="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/reset" method="_on_reset_button_up"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/reload" to="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/reload" method="_on_button_button_up"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/back" to="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/back" method="_on_button_button_up"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/exit" to="CenterContainer/VBoxContainer/exit" method="_on_button_button_up"]
+[connection signal="button_up" from="next_scene2" to="Node" method="SkipToBoss"]

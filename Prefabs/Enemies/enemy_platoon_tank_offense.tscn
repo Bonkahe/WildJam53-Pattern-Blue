@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3bu2mhyxt5db"]
+
+[ext_resource type="Script" path="res://code/Enemies/AIPlatoonController.cs" id="1_r7nm7"]
+[ext_resource type="PackedScene" uid="uid://c6m5eiviv2xp5" path="res://Prefabs/Enemies/tank.tscn" id="2_bc5rl"]
+[ext_resource type="PackedScene" uid="uid://dnkui0d0uy3fo" path="res://Prefabs/marker.tscn" id="3_72ts8"]
+
+[node name="EnemyPlatoonTankOffense" type="Node3D" node_paths=PackedStringArray("MarkerPosition") groups=["Enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0133, 0.567714, -31.9502)
+script = ExtResource("1_r7nm7")
+PlatoonControllerPaths = [NodePath("Tank"), NodePath("Tank2"), NodePath("Tank3"), NodePath("Tank4")]
+MarkerPosition = NodePath("Marker")
+ThisAIType = 5
+AllowEngagement = true
+EngageDistance = 40.0
+WanderDelayRange = Vector2(5, 8)
+WanderDistanceRange = Vector2(30, 40)
+
+[node name="Tank" parent="." instance=ExtResource("2_bc5rl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.00696278, -1.48837, -1.569)
+
+[node name="Tank2" parent="." instance=ExtResource("2_bc5rl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.1752, -1.1952, -1.41096)
+
+[node name="Tank3" parent="." instance=ExtResource("2_bc5rl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.33236, -0.946377, 0.861645)
+
+[node name="Tank4" parent="." instance=ExtResource("2_bc5rl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.128573, -1.749, 0.170666)
+NavAgentPath = NodePath("../Tank/TankNavAgent")
+
+[node name="Marker" parent="." instance=ExtResource("3_72ts8")]

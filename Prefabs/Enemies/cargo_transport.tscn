@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://8ksluxxr1oyf"]
+
+[ext_resource type="Script" path="res://code/Enemies/AITroopController.cs" id="1_buhpw"]
+[ext_resource type="PackedScene" uid="uid://bbfdnsomy8m3v" path="res://Prefabs/Enemies/death_explosion.tscn" id="2_sh1na"]
+[ext_resource type="ArrayMesh" uid="uid://bfheeqpqfpr4v" path="res://art/Meshes/Enemies/CargoTransport.obj" id="3_etbn2"]
+[ext_resource type="Material" uid="uid://cxofr2o6xqk5x" path="res://art/Materials/Enemies/TankBody.tres" id="4_1bqa2"]
+
+[node name="CargoTransport" type="Node3D" node_paths=PackedStringArray("Visuals")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -33.1082, -1.15914, -18.9593)
+script = ExtResource("1_buhpw")
+MovementColliderLayers = 1
+EffectRegionColliderLayers = 65536
+DeathEffect = ExtResource("2_sh1na")
+NavAgentPath = NodePath("TankNavAgent")
+Visuals = NodePath("Visuals")
+MovementSpeed = 5.0
+SlowedMovementSpeed = 1.0
+RotationSpeed = 5.0
+
+[node name="TankNavAgent" type="NavigationAgent3D" parent="."]
+agent_height_offset = 0.4
+
+[node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="CargoTransport" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(-2.00536e-08, 0, -0.458774, 0.458774, -2.00536e-08, -2.00536e-08, -2.00536e-08, -0.458774, 8.76571e-16, 0, 0, -0.106981)
+mesh = ExtResource("3_etbn2")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("4_1bqa2")

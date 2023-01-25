@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bjpbo2nrxgvvm"]
+
+[ext_resource type="Script" path="res://code/Player/Resources/InteractionDefinition.cs" id="1_wi5o7"]
+[ext_resource type="PackedScene" uid="uid://c7wqe0wmp35oa" path="res://Prefabs/ocean_effect.tscn" id="1_yps2u"]
+
+[resource]
+script = ExtResource("1_wi5o7")
+InteractionName = "OceanBlock"
+Color = Color(0.564706, 0.0235294, 0.0941176, 1)
+EffectScene = ExtResource("1_yps2u")
+EffectSpawnCount = 10
+EffectSpawnInterval = 0.15

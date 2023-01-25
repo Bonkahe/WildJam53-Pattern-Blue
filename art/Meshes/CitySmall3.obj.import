@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dbygmkv8gtgi3"
+path="res://.godot/imported/CitySmall3.obj-258bf3440a952cf79639e901a2fd8fcc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/CitySmall3.obj-258bf3440a952cf79639e901a2fd8fcc.mesh"]
+
+source_file="res://art/Meshes/CitySmall3.obj"
+dest_files=["res://.godot/imported/CitySmall3.obj-258bf3440a952cf79639e901a2fd8fcc.mesh", "res://.godot/imported/CitySmall3.obj-258bf3440a952cf79639e901a2fd8fcc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

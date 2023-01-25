@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cqj6nkjoxht1f"
+path="res://.godot/imported/LowLandsTown.obj-03271a8ab358431532dc9899a6afa169.mesh"
+
+[deps]
+
+files=["res://.godot/imported/LowLandsTown.obj-03271a8ab358431532dc9899a6afa169.mesh"]
+
+source_file="res://art/Meshes/LowLandsTown.obj"
+dest_files=["res://.godot/imported/LowLandsTown.obj-03271a8ab358431532dc9899a6afa169.mesh", "res://.godot/imported/LowLandsTown.obj-03271a8ab358431532dc9899a6afa169.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

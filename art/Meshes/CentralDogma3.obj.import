@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b8gunhpjquct7"
+path="res://.godot/imported/CentralDogma3.obj-0e18533418a7793610b1e10f1d8620c5.mesh"
+
+[deps]
+
+files=["res://.godot/imported/CentralDogma3.obj-0e18533418a7793610b1e10f1d8620c5.mesh"]
+
+source_file="res://art/Meshes/CentralDogma3.obj"
+dest_files=["res://.godot/imported/CentralDogma3.obj-0e18533418a7793610b1e10f1d8620c5.mesh", "res://.godot/imported/CentralDogma3.obj-0e18533418a7793610b1e10f1d8620c5.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

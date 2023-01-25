@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://3u2tx85jh3d2"]
+
+[ext_resource type="Script" path="res://code/Enemies/AIGroupController.cs" id="1_26evt"]
+[ext_resource type="PackedScene" uid="uid://dw8g008wkb5i7" path="res://Prefabs/Enemies/enemy_platoon_cargo.tscn" id="1_yfhmm"]
+[ext_resource type="PackedScene" uid="uid://b3bu2mhyxt5db" path="res://Prefabs/Enemies/enemy_platoon_tank_offense.tscn" id="3_8q1ce"]
+
+[node name="SupplyLine" type="Node3D" groups=["EnemyCommand"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0765114, 0.399269, 0.322586)
+script = ExtResource("1_26evt")
+SupplyPlatoonControllerPaths = [NodePath("EnemyPlatoonCargo")]
+
+[node name="EnemyPlatoonCargo" parent="." instance=ExtResource("1_yfhmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10119, -0.607089, -0.104625)
+
+[node name="EnemyPlatoonTankOffense" parent="." node_paths=PackedStringArray("FollowTarget") instance=ExtResource("3_8q1ce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.54861, 0.567714, 4.58444)
+ThisAIType = 2
+FollowTarget = NodePath("../EnemyPlatoonCargo")
+
+[node name="EnemyPlatoonTankOffense2" parent="." node_paths=PackedStringArray("FollowTarget") instance=ExtResource("3_8q1ce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.36163, 0.567716, -5.25244)
+ThisAIType = 2
+FollowTarget = NodePath("../EnemyPlatoonCargo")
+
+[node name="EnemyPlatoonTankOffense3" parent="." node_paths=PackedStringArray("FollowTarget") instance=ExtResource("3_8q1ce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9681, 0.567714, -0.0954685)
+ThisAIType = 2
+FollowTarget = NodePath("../EnemyPlatoonCargo")

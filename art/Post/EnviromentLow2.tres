@@ -1,0 +1,41 @@
+[gd_resource type="Environment" load_steps=5 format=3 uid="uid://dctivsgv18s84"]
+
+[sub_resource type="Gradient" id="Gradient_qqeme"]
+offsets = PackedFloat32Array(0, 0.170833, 0.5, 0.808333, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.153999, 0.171486, 0.205961, 1, 0.52549, 0.466667, 0.447059, 1, 0.817401, 0.808264, 0.783456, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5o82s"]
+gradient = SubResource("Gradient_qqeme")
+width = 512
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k07gv"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_crxbg"]
+sky_material = SubResource("ProceduralSkyMaterial_k07gv")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_crxbg")
+tonemap_mode = 3
+ssr_fade_out = 2.00001
+ssr_depth_tolerance = 128.0
+sdfgi_min_cell_size = 0.0683594
+sdfgi_cascade0_distance = 4.375
+sdfgi_max_distance = 70.0
+sdfgi_y_scale = 0
+glow_enabled = true
+glow_intensity = 4.69
+glow_strength = 0.84
+fog_enabled = true
+fog_light_color = Color(0.556863, 0.376471, 0.364706, 1)
+fog_sun_scatter = 0.78
+fog_density = 0.0085
+volumetric_fog_density = 0.015
+volumetric_fog_albedo = Color(0.756863, 0.827451, 0.901961, 1)
+volumetric_fog_length = 214.42
+volumetric_fog_ambient_inject = 0.62
+volumetric_fog_temporal_reprojection_amount = 0.96
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_5o82s")

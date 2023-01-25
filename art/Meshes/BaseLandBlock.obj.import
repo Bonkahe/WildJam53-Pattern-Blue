@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cvtrcvxw4rwt2"
+path="res://.godot/imported/BaseLandBlock.obj-eb8ca11a1d5163d831c704b399aa83d0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BaseLandBlock.obj-eb8ca11a1d5163d831c704b399aa83d0.mesh"]
+
+source_file="res://art/Meshes/BaseLandBlock.obj"
+dest_files=["res://.godot/imported/BaseLandBlock.obj-eb8ca11a1d5163d831c704b399aa83d0.mesh", "res://.godot/imported/BaseLandBlock.obj-eb8ca11a1d5163d831c704b399aa83d0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ye1coh5a8oyc"]
+
+[ext_resource type="Script" path="res://code/Player/Resources/InteractionDefinition.cs" id="1_blp7i"]
+
+[resource]
+script = ExtResource("1_blp7i")
+InteractionName = "Mud"
+Color = Color(0.607843, 0.247059, 0.121569, 1)

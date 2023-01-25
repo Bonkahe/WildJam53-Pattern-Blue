@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://de5hs8v8pqbnv"
+path="res://.godot/imported/TownHouse4.obj-782b85e52f671b2afd8ff018b3fbb28f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/TownHouse4.obj-782b85e52f671b2afd8ff018b3fbb28f.mesh"]
+
+source_file="res://art/Meshes/TownHouse4.obj"
+dest_files=["res://.godot/imported/TownHouse4.obj-782b85e52f671b2afd8ff018b3fbb28f.mesh", "res://.godot/imported/TownHouse4.obj-782b85e52f671b2afd8ff018b3fbb28f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

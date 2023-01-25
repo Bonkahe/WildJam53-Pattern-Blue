@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://bn3kjb0qpnvpl"]
+
+[ext_resource type="Script" path="res://code/World/DeleteEffectAfterTime.cs" id="1_rusdy"]
+[ext_resource type="AudioStream" uid="uid://ckg0tpaggt5iy" path="res://Audio/EvaDamaged.mp3" id="2_i7pi5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pf0c"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+proximity_fade_enabled = true
+proximity_fade_distance = 25.0
+distance_fade_mode = 1
+distance_fade_max_distance = 20.0
+
+[sub_resource type="Gradient" id="Gradient_4qpnl"]
+offsets = PackedFloat32Array(0, 0.494424, 0.855019, 1)
+colors = PackedColorArray(0.702629, 0, 0.275973, 0.0669842, 0.64124, 0.156234, 0.15594, 0.472794, 0.584358, 0.300999, 0.0447182, 0.848816, 0.560784, 0.360784, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rvt15"]
+gradient = SubResource("Gradient_4qpnl")
+
+[sub_resource type="Curve" id="Curve_370i6"]
+_data = [Vector2(0, 0), 0.0, 0.0977272, 0, 0, Vector2(0.592466, 0.854545), 0.908134, 0.908134, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1g36e"]
+curve = SubResource("Curve_370i6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_43iaq"]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 1.8
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, -0.5, 0)
+initial_velocity_max = 2.0
+angle_min = -133.1
+scale_min = 15.0
+scale_max = 45.0
+scale_curve = SubResource("CurveTexture_1g36e")
+color_ramp = SubResource("GradientTexture1D_rvt15")
+
+[sub_resource type="SphereMesh" id="SphereMesh_u488w"]
+
+[node name="EvaDamagedEffect" type="Node3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 95.4548, -1.35051, 7.86161)
+script = ExtResource("1_rusdy")
+Duration = 2.1
+
+[node name="DamageEffect" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_6pf0c")
+cast_shadow = 0
+lifetime = 2.05
+explosiveness = 1.0
+randomness = 0.15
+visibility_aabb = AABB(-18, -23, -18, 36, 46, 36)
+process_material = SubResource("ParticleProcessMaterial_43iaq")
+draw_pass_1 = SubResource("SphereMesh_u488w")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_i7pi5")
+volume_db = -1.398
+unit_size = 6.69
+autoplay = true
+bus = &"Eva"

@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://c0at16nuxaun2"]
+
+[ext_resource type="Script" path="res://code/World/DeleteEffectAfterTime.cs" id="1_n1bd7"]
+[ext_resource type="Texture2D" uid="uid://den8rpc5pu7l" path="res://art/Textures/LaserOrigin.png" id="2_btnxg"]
+[ext_resource type="AudioStream" uid="uid://c3rlsvms73j7u" path="res://Audio/LaserOriginAudio.mp3" id="3_rrfed"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wmq5"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_btnxg")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 15.89
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+proximity_fade_enabled = true
+proximity_fade_distance = 26.92
+
+[sub_resource type="Curve" id="Curve_jnsk7"]
+max_value = 10.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.727273), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y2tms"]
+curve = SubResource("Curve_jnsk7")
+
+[sub_resource type="Gradient" id="Gradient_r3xwa"]
+offsets = PackedFloat32Array(0, 0.505576, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e1k0k"]
+gradient = SubResource("Gradient_r3xwa")
+
+[sub_resource type="Curve" id="Curve_hni6m"]
+_data = [Vector2(0, 0), 0.0, 0.0977272, 0, 0, Vector2(0.592466, 0.854545), 0.908134, 0.908134, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1pltl"]
+curve = SubResource("Curve_hni6m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hu01p"]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 1.8
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, -0.5, 0)
+initial_velocity_max = 2.0
+angle_max = 180.0
+angle_curve = SubResource("CurveTexture_y2tms")
+scale_min = 30.0
+scale_max = 45.0
+scale_curve = SubResource("CurveTexture_1pltl")
+color_ramp = SubResource("GradientTexture1D_e1k0k")
+
+[sub_resource type="QuadMesh" id="QuadMesh_e3t8p"]
+
+[node name="EvaLaserOrigin" type="Node3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -20.9246, 9.42904, -13.5642)
+script = ExtResource("1_n1bd7")
+Duration = 2.1
+
+[node name="DamageEffect" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_7wmq5")
+cast_shadow = 0
+amount = 1
+lifetime = 0.5
+visibility_aabb = AABB(-38.8528, -34.2064, -36.1869, 77.7056, 68.4127, 72.3737)
+process_material = SubResource("ParticleProcessMaterial_hu01p")
+draw_pass_1 = SubResource("QuadMesh_e3t8p")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_rrfed")
+volume_db = -0.51
+unit_size = 85.58
+autoplay = true
+bus = &"Eva"

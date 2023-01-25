@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc47heahwhltx"]
+
+[ext_resource type="Script" path="res://code/Enemies/AIPlatoonController.cs" id="1_1xjs3"]
+[ext_resource type="PackedScene" uid="uid://dd26kaloyoq6b" path="res://Prefabs/Enemies/flak_shot.tscn" id="2_u6a72"]
+[ext_resource type="PackedScene" uid="uid://b52jwaqqg5wp1" path="res://Prefabs/Enemies/tank_anti_air.tscn" id="3_5wmci"]
+[ext_resource type="PackedScene" uid="uid://dnkui0d0uy3fo" path="res://Prefabs/marker.tscn" id="4_20fs5"]
+
+[node name="EnemyPlatoonFlak" type="Node3D" node_paths=PackedStringArray("MarkerPosition") groups=["Enemies"]]
+script = ExtResource("1_1xjs3")
+PlatoonControllerPaths = [NodePath("TankAntiAir"), NodePath("TankAntiAir2"), NodePath("TankAntiAir3"), NodePath("TankAntiAir4")]
+MarkerPosition = NodePath("Marker")
+ThisAIType = 1
+AllowEngagement = true
+EngageDistance = 30.0
+AmbientEffectRadius = 2.0
+AmbientEffectPath = NodePath("FlakShot")
+WanderDelayRange = Vector2(3, 6)
+WanderDistanceRange = Vector2(30, 40)
+
+[node name="FlakShot" parent="." instance=ExtResource("2_u6a72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.87638, 0)
+
+[node name="TankAntiAir" parent="." instance=ExtResource("3_5wmci")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.506401, -1.38592, -2.30698)
+
+[node name="TankAntiAir2" parent="." instance=ExtResource("3_5wmci")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.475, -1.38592, -0.203477)
+
+[node name="TankAntiAir3" parent="." instance=ExtResource("3_5wmci")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2662, -1.38592, 0.134723)
+
+[node name="TankAntiAir4" parent="." instance=ExtResource("3_5wmci")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.7929, -1.38592, -1.57318)
+
+[node name="Marker" parent="." instance=ExtResource("4_20fs5")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

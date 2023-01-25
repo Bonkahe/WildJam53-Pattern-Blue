@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://yijm60bc0d5t"
+path="res://.godot/imported/TankAntiAir.obj-49174a7cacdfad884ef271fcd65b9f93.mesh"
+
+[deps]
+
+files=["res://.godot/imported/TankAntiAir.obj-49174a7cacdfad884ef271fcd65b9f93.mesh"]
+
+source_file="res://art/Meshes/Enemies/TankAntiAir.obj"
+dest_files=["res://.godot/imported/TankAntiAir.obj-49174a7cacdfad884ef271fcd65b9f93.mesh", "res://.godot/imported/TankAntiAir.obj-49174a7cacdfad884ef271fcd65b9f93.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

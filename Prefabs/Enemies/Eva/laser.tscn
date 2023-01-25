@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://nb3esvrnhc11"]
+
+[ext_resource type="Script" path="res://code/Enemies/Eva/LaserController.cs" id="1_hxpy0"]
+[ext_resource type="PackedScene" uid="uid://ukjjwsg26cea" path="res://Prefabs/Enemies/Eva/LaserImpact.tscn" id="2_r7mw7"]
+[ext_resource type="PackedScene" uid="uid://c0at16nuxaun2" path="res://Prefabs/Enemies/Eva/eva_laser_origin.tscn" id="3_d2mcy"]
+
+[node name="Laser" type="Node3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -20.9246, 9.42904, -13.5642)
+script = ExtResource("1_hxpy0")
+LaserHitCollisionMask = 257
+ImpactEffect = ExtResource("2_r7mw7")
+SwipeRandomizationDistance = 25.0
+SwipeTime = 0.5
+SwipeDistance = 20.0
+Damage = 600.0
+
+[node name="EvaLaserOrigin" parent="." instance=ExtResource("3_d2mcy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+Duration = 0.6

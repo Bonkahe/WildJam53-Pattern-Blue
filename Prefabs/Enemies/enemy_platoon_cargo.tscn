@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dw8g008wkb5i7"]
+
+[ext_resource type="Script" path="res://code/Enemies/AIPlatoonController.cs" id="1_3ry8n"]
+[ext_resource type="PackedScene" uid="uid://8ksluxxr1oyf" path="res://Prefabs/Enemies/cargo_transport.tscn" id="2_m5ldl"]
+[ext_resource type="PackedScene" uid="uid://dnkui0d0uy3fo" path="res://Prefabs/marker.tscn" id="3_eulfv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nyjmq"]
+load_path = "res://.godot/imported/Marker.png-4b3ed31f6a7ef6c1a306dcf759061589.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fao3"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.690196, 0.411765, 0, 1)
+albedo_texture = SubResource("CompressedTexture2D_nyjmq")
+billboard_mode = 1
+billboard_keep_scale = true
+grow_amount = 5.614
+fixed_size = true
+point_size = 28.2
+distance_fade_mode = 1
+distance_fade_max_distance = 20.0
+
+[node name="EnemyPlatoonCargo" type="Node3D" node_paths=PackedStringArray("MarkerPosition") groups=["Enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.9384, -1.1247, -19.0038)
+script = ExtResource("1_3ry8n")
+PlatoonControllerPaths = [NodePath("CargoTransport"), NodePath("CargoTransport2"), NodePath("CargoTransport3")]
+MarkerPosition = NodePath("Marker")
+ThisAIType = 4
+EngageDistance = 30.0
+WanderDelayRange = Vector2(3, 6)
+WanderDistanceRange = Vector2(30, 40)
+
+[node name="CargoTransport" parent="." instance=ExtResource("2_m5ldl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.8302, -0.0344414, 0.0444679)
+
+[node name="CargoTransport2" parent="." instance=ExtResource("2_m5ldl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.365768, -0.0344414, -0.524864)
+
+[node name="CargoTransport3" parent="." instance=ExtResource("2_m5ldl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.2942, -0.0344414, 1.3218)
+
+[node name="Marker" parent="." instance=ExtResource("3_eulfv")]
+
+[node name="MarkerTexture" parent="Marker" index="0"]
+transform = Transform3D(0.0593993, 0, 0, 0, 0.0593993, 0, 0, 0, 0.0593993, 0, 13.142, 0)
+material_override = SubResource("StandardMaterial3D_0fao3")
+
+[editable path="Marker"]

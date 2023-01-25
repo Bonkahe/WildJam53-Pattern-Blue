@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6m5eiviv2xp5"]
+
+[ext_resource type="ArrayMesh" uid="uid://bmkuvebfaqm2i" path="res://art/Meshes/Enemies/Tank.obj" id="1_gwj7p"]
+[ext_resource type="Script" path="res://code/Enemies/AITank.cs" id="1_suujc"]
+[ext_resource type="PackedScene" uid="uid://dtriadlvgopqi" path="res://Prefabs/Enemies/explosion_test.tscn" id="2_0sbr6"]
+[ext_resource type="Material" uid="uid://cxofr2o6xqk5x" path="res://art/Materials/Enemies/TankBody.tres" id="2_d8yus"]
+[ext_resource type="PackedScene" uid="uid://bhajsmeyjcc5x" path="res://Prefabs/Enemies/tank_effect.tscn" id="3_17wg4"]
+[ext_resource type="PackedScene" uid="uid://bbfdnsomy8m3v" path="res://Prefabs/Enemies/death_explosion.tscn" id="4_dyc5h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6p4gl"]
+emission_enabled = true
+emission = Color(0.627451, 0.34902, 0, 1)
+emission_energy_multiplier = 12.23
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_olagv"]
+
+[node name="Tank" type="Node3D" node_paths=PackedStringArray("cannonShot", "cannonShotOrigin", "Visuals")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.24289, -1.38592, -6.32975)
+script = ExtResource("1_suujc")
+ImpactEffect = ExtResource("2_0sbr6")
+TankFireEffect = ExtResource("3_17wg4")
+cannonShot = NodePath("CannonShot")
+cannonShotOrigin = NodePath("Visuals/TankMesh/CannonOrigin")
+CannonAimVariance = 3.0
+CannonReloadVariance = Vector2(0.1, 0.3)
+MovementColliderLayers = 1
+EffectRegionColliderLayers = 65536
+DeathEffect = ExtResource("4_dyc5h")
+NavAgentPath = NodePath("TankNavAgent")
+Visuals = NodePath("Visuals")
+MovementSpeed = 7.0
+SlowedMovementSpeed = 3.0
+
+[node name="TankNavAgent" type="NavigationAgent3D" parent="."]
+agent_height_offset = 0.4
+
+[node name="CannonShot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.188191, -0.714556)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CannonShot"]
+transform = Transform3D(0.2, 0, 0, 0, -2.62268e-08, 0.2, 0, -0.6, -8.74228e-09, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6p4gl")
+mesh = SubResource("CapsuleMesh_olagv")
+skeleton = NodePath("../..")
+
+[node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="TankMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0.5, -2.18557e-08, -2.18557e-08, -2.18557e-08, -0.5, 9.55343e-16, 0, 0, 0)
+mesh = ExtResource("1_gwj7p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("2_d8yus")
+
+[node name="CannonOrigin" type="Node3D" parent="Visuals/TankMesh"]
+transform = Transform3D(-4.37114e-08, 0.258819, 0.965926, 0, 0.965926, -0.258819, -1, -1.13133e-08, -4.2222e-08, -1.63031, 0.664808, 0.0107193)

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnkui0d0uy3fo"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nyjmq"]
+load_path = "res://.godot/imported/Marker.png-4b3ed31f6a7ef6c1a306dcf759061589.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60at6"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.717647, 0, 0.176471, 1)
+albedo_texture = SubResource("CompressedTexture2D_nyjmq")
+billboard_mode = 1
+billboard_keep_scale = true
+grow_amount = 5.614
+fixed_size = true
+point_size = 28.2
+distance_fade_mode = 1
+distance_fade_max_distance = 20.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_oci6q"]
+
+[node name="Marker" type="Node3D"]
+
+[node name="MarkerTexture" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0593993, 0, 0, 0, 0.0593993, 0, 0, 0, 0.0593993, 0, 10, 0)
+material_override = SubResource("StandardMaterial3D_60at6")
+mesh = SubResource("QuadMesh_oci6q")
+skeleton = NodePath("../..")
